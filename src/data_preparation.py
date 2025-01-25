@@ -10,7 +10,7 @@ import seaborn as sns
 from pyspark.sql.functions import concat, lit
 from pyspark.sql.functions import year, month
 from pyspark.sql.functions import when
-from pyspark.ml.feature import VectorAssembler
+# from pyspark.ml.feature import VectorAssembler
 from sklearn.ensemble import IsolationForest
 from pyspark.sql.window import Window
 from pyspark.sql.functions import lag
@@ -38,7 +38,7 @@ spark = SparkSession.builder \
 #%%
 # hmis_data = spark.read.csv(str(RAW_DATA_PATH) + "/major-health-indicators-subdistrict-level.csv", header=True, inferSchema=True)
 # Read CSV with explicit date parsing
-hmis_data = (
+hmis_data: object = (
     spark.read.option("header", "true")
     .option("inferSchema", "true")
     .csv(str(RAW_DATA_PATH) + "/major-health-indicators-subdistrict-level.csv")
@@ -46,7 +46,6 @@ hmis_data = (
 )
 # check schema
 hmis_data.printSchema()
-
 #%%
 # describe the data
 hmis_data.describe().show()
@@ -76,7 +75,7 @@ full_data = hmis_data.unionByName(missing_data, allowMissingColumns=True).distin
 full_data = full_data.orderBy("subdistrict_code", "date")
 
 # Check the final dataset count and ensure dates have been added
-print(f"Total records after adding missing months: {full_data.count()}")
+print(f"Sample record count: {full_data.sample(0.1).count()}")
 
 # Display a sample of the final dataset to verify
 full_data.show(10)
