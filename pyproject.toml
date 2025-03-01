@@ -17,6 +17,9 @@ matplotlib = "^3.9.2"
 scikit-learn = "^1.5.2"
 numpy = {version = "2.2.2", source = "pypi"}
 polars = "^1.20.0"
+pyarrow = "^19.0.0"
+plotly = "^5.24.1"
+nbformat = ">=4.2.0"
 
 
 [build-system]

@@ -1,6 +1,7 @@
 # remove files from data and reports folders
 data/
 reports/*.html
+reports/**/*.png
 
 
 # Byte-compiled / optimized / DLL files
